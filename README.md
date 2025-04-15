@@ -1,6 +1,6 @@
 # Luces Fuera 🟡⚫
 
-Este proyecto implementa la lógica del juego, un clásico juego de lógica en el que el objetivo es apagar todas las luces del tablero.
+Este proyecto implementa la lógica del juego, un clásico juego de lógica en el que el objetivo es apagar todas las luces del tablero,para las clases Posicion y Tablero.
 
 #  instalacion de entornos
 Se utilizaron entornos virtuales (`.venv` y `env`) para instalar las dependencias necesarias.
@@ -8,41 +8,41 @@ Se utilizaron entornos virtuales (`.venv` y `env`) para instalar las dependencia
 instalacion de las dependencias 
 pip install -r requirements.txt
 
-#  Test que deberian haber fallado 
-Estos tests fueron diseñados con valores de assert que no corresponden a los resultados esperados. Si todos estos tests pasan, es probable que los métodos en la clase Posicion estén mal implementados o no hagan nada.
+# Estructura del Proyecto
+El código se organiza en dos módulos principales:
 
-test_diagonal_inferior_derecha_desde_origen
-Error esperado: El movimiento abajo y derecha desde (0, 0) debería dar (1, 1), no (99, 99).
+lucesfuera.game.board:
 
-test_diagonal_superior_izquierda_desde_origen
-Error esperado: Desde (0, 0), moverse arriba e izquierda da (-1, -1), no (42, 42).
+Define la clase Tablero que representa el tablero del juego.
 
-test_diagonal_inferior_izquierda_desde_5_5
-Error esperado: El resultado real debe ser (6, 4).Los assert están muy lejos de eso.
+Define la clase Posicion que representa una posición en el tablero.
 
-test_diagonal_superior_derecha_desde_3_3
-Error esperado: Moverse arriba y derecha da (2, 4), no (8, 8).
+lucesfuera.game.luz:
 
-test_diagonal_superior_derecha_negativa
-Error esperado: Esto daría (-3, -1), no (0, 0).
+Define la clase Luz que puede estar encendida (ON) o apagada (OFF).
 
-test_diagonal_doble_arriba_izquierda
-Error esperado: Debería terminar en (-1, 0), no (999, 999).
+# Estructura del Proyecto
+1. Clase Posicion
+La clase Posicion maneja las coordenadas de una posición en el tablero, representadas por fila y columna. Los métodos de la clase permiten mover la posición de diferentes formas
 
+2. Clase Tablero
+La clase Tablero representa un tablero de juego donde las luces pueden ser encendidas o apagadas. El tablero es una matriz de objetos Luz, y se utiliza el siguiente método para manipular el tablero.
 
-test_diagonal_fuera_de_rango
-Error esperado: Debería ser (1000, 1000), no (-1, -1).
+3. Clase Luz
+La clase Luz tiene dos estados posibles:
 
-#  Pruebas
+Luz.OFF: La luz está apagada.
+Luz.ON: La luz está encendida.
 
-Las pruebas están escritas con pytest. Se encuentran en la carpeta tests/ y validan principalmente el comportamiento de la clase Posicion, ubicada en lucesfuera/game/board.py.
+# Pruebas Unitarias
+Las pruebas unitarias están organizadas en varios conjuntos de pruebas utilizando la librería pytest. Las pruebas cubren varios aspectos del juego:
 
-Para ejecutar los tests correctamente desde PowerShell, se debe establecer el PYTHONPATH para que Python reconozca los módulos del proyecto. Ejecuta el siguiente comando desde la raíz del proyecto:
+1. Pruebas de Posición
+Se verifica si las posiciones se mueven correctamente en las direcciones especificadas (derecha, izquierda, diagonal derecha arriba, diagonal izquierda arriba).
 
-- Esto realiza dos acciones:
+Se incluyen pruebas que validan los movimientos en los bordes del tablero y aseguran que las posiciones sean correctas.
 
-- Establece la ruta del proyecto como referencia para las importaciones.
+2. Pruebas de Tablero
+Se comprueba la correcta creación del tablero .
 
-Ejecuta todos los archivos de prueba que comienzan con test_.
-$env:PYTHONPATH = "."; pytest
-
+Se realiza la prueba de encender y apagar luces en varias posiciones del tablero y se valida que el estado de las luces en el tablero sea el esperado.
